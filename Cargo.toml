@@ -5,3 +5,7 @@ edition = "2024"
 
 [dependencies]
 gtk4 = "0.9.6"
+gstreamer = { version = "0.23" }
+gstreamer-base = { version = "0.23" }
+gstreamer-video = { version = "0.23"  }
+gstreamer-app = { version = "0.23" }

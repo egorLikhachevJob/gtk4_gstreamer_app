@@ -14,7 +14,6 @@ impl ObjectImpl for CustomPaintable {}
 
 impl PaintableImpl for CustomPaintable {
     fn flags(&self) -> gdk::PaintableFlags {
-        // Fixed size
         gdk::PaintableFlags::SIZE
     }
 
@@ -27,7 +26,6 @@ impl PaintableImpl for CustomPaintable {
     }
 
     fn snapshot(&self, snapshot: &gdk::Snapshot, width: f64, height: f64) {
-        // Draw a linear gradient
         snapshot.append_linear_gradient(
             &graphene::Rect::new(0.0, 0.0, width as f32, height as f32),
             &graphene::Point::new(0f32, 0f32),
