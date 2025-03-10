@@ -9,11 +9,8 @@ use gstreamer_app::AppSink;
 // use std::time::Duration;
 use custom_paintable::CustomPaintable;
 use gstreamer_app::AppSinkCallbacks;
-use gstreamer_video::video_meta::tags::Colorspace;
 use gtk4::gdk_pixbuf::Pixbuf;
 use gtk4::{glib, prelude::*};
-
-
 
 struct Config {
     camera: CameraConfig,
@@ -99,13 +96,16 @@ fn gstreamer_app() {
                 let samples = map.as_slice();
                 println!("{}", samples.len());
 
-                // let pixbuf = Pixbuf::new(
-                //     GDK_COLORSPACE_RGB, 
-                //     false,           
-                //     8,               
-                //     480,             
-                //     320              
-                // ).expect("Failed to create Pixbuf");
+                // Создаем Pixbuf из данных в samples
+                let pixbuf = Pixbuf::from_mut_slice(
+                    samples.to_vec(), // данные из samples
+                    gtk4::gdk_pixbuf::Colorspace::Rgb,
+                    false,   // has_alpha
+                    8,       // bits_per_sample
+                    480,     // width
+                    320,     // height
+                    480 * 3, // rowstride (width * number of channels)
+                );
 
                 Ok(gstreamer::FlowSuccess::Ok)
             })
